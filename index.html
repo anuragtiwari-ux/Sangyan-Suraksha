@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sangyan Suraksha – Check before you trust</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#faf6ec;--card:#fff;--tx:#2a1a1a;--mu:#6b5b5b;--pr:#8c1420;--ac:#dba04b;--bd:#e6dccb;--hi:#b3261e;--me:#b26a00;--lo:#2e6b3a}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1415;--card:#271d1e;--tx:#f3e9e4;--mu:#b9a9a4;--pr:#f08a8f;--bd:#3d2f30;--hi:#ff8a80;--me:#ffc266;--lo:#8fd19b}}
+:root[data-theme="dark"]{--bg:#1b1415;--card:#271d1e;--tx:#f3e9e4;--mu:#b9a9a4;--pr:#f08a8f;--bd:#3d2f30;--hi:#ff8a80;--me:#ffc266;--lo:#8fd19b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Noto Sans Devanagari",Segoe UI,sans-serif}
+main{max-width:720px;margin:0 auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center;gap:8px}
+h1{font-size:22px;margin:0;color:var(--pr)}h2{font-size:18px;margin:0 0 8px}
+.sub{color:var(--mu);margin:4px 0 12px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin:12px 0}
+button{font:inherit;border-radius:10px;border:1px solid var(--pr);background:var(--pr);color:#fff;padding:10px 14px;cursor:pointer;min-height:44px}
+button.s{background:transparent;color:var(--pr)}
+:root[data-theme="dark"] button:not(.s){color:#1b1415}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) button:not(.s){color:#1b1415}}
+.tabs{display:flex;gap:8px}.tabs button{flex:1}
+textarea,input{width:100%;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--tx)}
+textarea{min-height:120px}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.badge{display:inline-block;padding:4px 12px;border-radius:99px;font-weight:700;color:#fff}
+.High{background:var(--hi)}.Medium{background:var(--me)}.Low{background:var(--lo)}
+.bar{height:10px;border-radius:6px;background:var(--bd);overflow:hidden;margin:8px 0}.bar i{display:block;height:100%}
+li{margin:6px 0}.note{font-size:13px;color:var(--mu)}
+label.ck{display:flex;gap:10px;align-items:flex-start;margin:8px 0}label.ck input{width:22px;height:22px;margin-top:3px}
+pre{white-space:pre-wrap;background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:10px;font:14px/1.5 inherit;overflow-x:auto}
+a{color:var(--pr)}[hidden]{display:none!important}
+</style></head><body><main>
+<header><div><h1 id="t">संज्ञान सुरक्षा</h1><div class="sub" id="st"></div></div>
+<div class="row" style="margin:0"><button class="s" id="fs">A+</button><button class="s" id="lg">English</button></div></header>
+<div class="tabs"><button id="b1">1</button><button class="s" id="b2">2</button><button class="s" id="b3">3</button></div>
+
+<section id="p1">
+<div class="card"><h2 id="h1"></h2>
+<textarea id="in"></textarea>
+<div class="row"><button id="go"></button><button class="s" id="smp"></button></div>
+<p class="note" id="priv"></p></div>
+<div class="card" id="out" hidden></div>
+<div class="card"><h2 id="rct"></h2><label id="rcl"></label> <b id="rcv"></b><input type="range" id="rs" min="5" max="100" value="30" aria-label="monthly return"><p id="ro"></p></div>
+</section>
+
+<section id="p2" hidden>
+<div class="card"><h2 id="h2"></h2><div id="steps"></div></div>
+<div class="card"><h2 id="h3"></h2>
+<input id="f1"><div style="height:8px"></div><input id="f2"><div style="height:8px"></div><input id="f3"><div style="height:8px"></div><input id="f4">
+<div class="row"><button id="gen"></button><button class="s" id="cp"></button></div>
+<pre id="cmp" hidden></pre></div>
+</section>
+<section id="p3" hidden><div class="card" id="lab"></div></section>
+<details class="card"><summary id="gt"></summary><ul id="gl"></ul></details>
+<p class="note" id="ft"></p>
+</main>
+<script>
+var L="hi",$=function(i){return document.getElementById(i)};
+var T={
+hi:{t:"संज्ञान सुरक्षा",st:"भरोसा करने से पहले जाँचें — और ठगी हो जाए तो क्या करें, जानें।",b1:"संदेश जाँचें",b2:"ठगी के बाद",h1:"WhatsApp/Telegram का संदेश यहाँ चिपकाएँ",ph:"जैसे: 'गारंटी 30% महीना...'",go:"जाँचें",smp:"नमूना संदेश",priv:"आपका संदेश इसी फ़ोन/ब्राउज़र में जाँचा जाता है। कहीं भेजा या सहेजा नहीं जाता।",
+why:"कारण",cant:"जो हम जाँच नहीं सकते",listen:"सुनें",lv:{High:"ज़्यादा जोखिम",Medium:"मध्यम जोखिम",Low:"कोई बड़ा संकेत नहीं मिला"},
+lowN:"इसका मतलब सुरक्षित होना नहीं है। पैसा लगाने से पहले SEBI की वेबसाइट पर पंजीकरण ज़रूर जाँचें।",
+c1:"SEBI पंजीकरण नंबर असली है या नहीं, यह हम यहाँ नहीं जाँच सकते — sebi.gov.in पर 'Intermediaries' में खोजें।",c2:"लिंक का असली मालिक कौन है, यह हम नहीं देख सकते।",
+h2:"अगर पैसा फँस गया है — पहला घंटा",h3:"शिकायत का मसौदा बनाएँ",f1:"प्लेटफ़ॉर्म/ग्रुप का नाम",f2:"कितनी रकम गई (₹)",f3:"तारीख़",f4:"जिस UPI/खाते में भेजा",gen:"मसौदा बनाएँ",cp:"कॉपी करें",
+ft:"यह एक शैक्षिक निवेशक-सुरक्षा टूल है। यह कोई निवेश सलाह, टिप या सिफ़ारिश नहीं देता।",
+steps:["और पैसा भेजना तुरंत बंद करें। 'निकासी शुल्क' या 'टैक्स' के नाम पर माँगी गई रकम भी ठगी का हिस्सा है।","सबूत सहेजें: स्क्रीनशॉट, चैट, UPI लेन-देन ID, ग्रुप/प्रोफ़ाइल लिंक। चैट डिलीट न करें।","अपने बैंक/UPI ऐप को तुरंत कॉल करके लेन-देन रोकने/फ़्रीज़ का अनुरोध करें।","राष्ट्रीय साइबर हेल्पलाइन 1930 पर कॉल करें और cybercrime.gov.in पर शिकायत दर्ज करें। जितनी जल्दी, उतना बेहतर।","अगर कोई SEBI-पंजीकृत ब्रोकर/संस्था शामिल है, तो SCORES (scores.sebi.gov.in) पर शिकायत करें।","AnyDesk जैसा ऐप डाला हो तो हटाएँ और बैंक पासवर्ड बदलें।"],
+draft:function(a,b,c,d){return "विषय: ऑनलाइन निवेश धोखाधड़ी की शिकायत\n\nमैं एक पीड़ित निवेशक हूँ। मुझे '"+a+"' के नाम पर निवेश का झाँसा दिया गया।\nतारीख़: "+c+"\nगई रकम: ₹"+b+"\nभुगतान का माध्यम/खाता: "+d+"\n\nमेरे पास स्क्रीनशॉट, चैट और लेन-देन ID के सबूत हैं। कृपया जाँच कर रकम रोकने/वापस दिलाने में सहायता करें।\n\nनाम / मोबाइल: ________"}},
+en:{t:"Sangyan Suraksha",st:"Check before you trust — and know what to do if you've been hit.",b1:"Check a message",b2:"After a scam",h1:"Paste the WhatsApp/Telegram message",ph:"e.g. 'Guaranteed 30% monthly returns...'",go:"Check",smp:"Sample message",priv:"Your message is checked on this device. Nothing is sent or stored.",
+why:"Why",cant:"What we cannot verify",listen:"Listen",lv:{High:"High risk",Medium:"Medium risk",Low:"No strong red flags found"},
+lowN:"This does not mean it is safe. Always verify registration on SEBI's website before putting money in.",
+c1:"We cannot confirm whether a SEBI registration number is genuine here. Search 'Intermediaries' on sebi.gov.in.",c2:"We cannot see who actually owns a link or account.",
+h2:"If money is stuck — the first hour",h3:"Build your complaint draft",f1:"Platform / group name",f2:"Amount lost (₹)",f3:"Date",f4:"UPI/account you paid",gen:"Create draft",cp:"Copy",
+ft:"Educational investor-protection tool. It gives no investment advice, tips or recommendations.",
+steps:["Stop sending money now. Fees asked for 'withdrawal' or 'tax' are part of the scam.","Save evidence: screenshots, chats, UPI transaction IDs, group/profile links. Do not delete chats.","Call your bank / UPI app right away and ask them to block or freeze the transaction.","Call the national cyber helpline 1930 and file at cybercrime.gov.in. Faster is better.","If a SEBI-registered broker or entity is involved, file on SCORES (scores.sebi.gov.in).","If you installed a remote app like AnyDesk, remove it and change your banking passwords."],
+draft:function(a,b,c,d){return "Subject: Complaint about online investment fraud\n\nI am a victim investor. I was induced to invest through '"+a+"'.\nDate: "+c+"\nAmount lost: Rs "+b+"\nPaid via / account: "+d+"\n\nI hold screenshots, chats and transaction IDs as evidence. Please investigate and help block or recover the amount.\n\nName / mobile: ________"}}};
+var R=[
+{w:30,re:/guarantee|assured|100\s*%\s*(safe|profit|sure)|risk[- ]?free|गारंटी|पक्का\s*(मुनाफ|रिटर्न)|रिस्क\s*फ्री/i,en:"Promises guaranteed or risk-free returns. No genuine market product can do this.",hi:"गारंटीशुदा या बिना जोखिम के मुनाफ़े का वादा। असली बाज़ार में ऐसा संभव नहीं।"},
+{w:25,re:/\b\d{2,3}\s*%[^.\n]{0,25}(month|week|daily|day|monthly|महीन|हफ्त|रोज|दिन)|(month|week|daily|महीन|हफ्त|रोज)[^.\n]{0,25}\d{2,3}\s*%/i,en:"Claims a very high return in a short time (tens of % per month/week).",hi:"थोड़े समय में बहुत ज़्यादा रिटर्न (महीने/हफ़्ते में दसियों %) का दावा।"},
+{w:20,re:/double|2x|दोगुना|डबल/i,en:"Promises to double your money.",hi:"पैसा दोगुना करने का वादा।"},
+{w:15,re:/limited (seats|slots|time)|today only|last chance|hurry|act now|जल्दी|आज ही|सीमित|आखिरी मौका/i,en:"Creates urgency to make you act before thinking.",hi:"सोचने का समय न देकर जल्दबाज़ी कराने की कोशिश।"},
+{w:15,re:/telegram|t\.me\/|join (our|my|the) (vip|group|channel)|vip group|ग्रुप\s*(जॉइन|में जुड़)|टेलीग्राम/i,en:"Pushes you into a private Telegram/WhatsApp 'VIP' group, a common pump-and-dump route.",hi:"आपको निजी टेलीग्राम/WhatsApp 'VIP' ग्रुप में खींचना — पंप-एंड-डंप का आम तरीका।"},
+{w:25,re:/(send|pay|transfer|deposit)[^.\n]{0,30}(upi|paytm|gpay|phonepe|account)|@(ybl|oksbi|okhdfcbank|paytm|axl|ibl)|\bUPI\b[^.\n]{0,15}[a-z0-9.]+@|पर\s*(पैसे|रकम)\s*भेज|ट्रांसफर\s*करें/i,en:"Asks you to pay into a personal UPI ID or account instead of a regulated broker platform.",hi:"नियमित ब्रोकर के बजाय निजी UPI/खाते में पैसे भेजने को कहना।"},
+{w:30,re:/anydesk|teamviewer|quicksupport|rustdesk/i,en:"Asks you to install a remote-access app. Genuine firms never need this.",hi:"रिमोट-एक्सेस ऐप इंस्टॉल करने को कहना। असली कंपनियाँ ऐसा नहीं कहतीं।"},
+{w:15,re:/sure[- ]?shot|insider|operator|jackpot|multibagger|ऑपरेटर|जैकपॉट|सुरेशॉट/i,en:"Uses 'sure-shot / insider / operator' tip language.",hi:"'सुरेशॉट / इनसाइडर / ऑपरेटर' जैसी टिप वाली भाषा।"},
+{w:20,re:/(bit\.ly|tinyurl|cutt\.ly|wa\.me)\/|https?:\/\/[^\s]*\.(xyz|top|vip|click|site|online|buzz)\b|https?:\/\/[^\s]*(sebi|nse|bse|zerodha|upstox|groww)[^\s]*-[^\s]*/i,en:"Contains a shortened or lookalike link that could imitate an official site.",hi:"छोटा या नकली-जैसा लिंक जो किसी आधिकारिक साइट की नक़ल हो सकता है।"}];
+function analyse(x){var s=0,f=[];x=x.replace(/\b(not|no|never)\s+(be\s+)?guarantee\w*/gi,"");R.forEach(function(r){if(r.re.test(x)){s+=r.w;f.push(r[L])}});
+ var claim=/sebi\s*(registered|approved|certified)|सेबी\s*(पंजीकृत|रजिस्टर|मान्य)/i.test(x);
+ if(claim){var ok=/\bIN[ZHAPMB]\d{9}\b/i.test(x);
+  if(!ok){s+=20;f.push(L=="hi"?"'SEBI पंजीकृत' बताया पर सही फ़ॉर्मेट का पंजीकरण नंबर (जैसे INH + 9 अंक) नहीं दिया।":"Claims to be 'SEBI registered' but gives no registration number in a valid format (e.g. INH + 9 digits).")}
+  else f.push(L=="hi"?"पंजीकरण नंबर दिया गया है — सिर्फ़ फ़ॉर्मेट सही दिखता है; असली है या नहीं, SEBI साइट पर खुद जाँचें।":"A registration number is given and its format looks valid; confirm it on SEBI's site, the format alone proves nothing.")}
+ s=Math.min(s,100);return{s:s,f:f,lv:s>=55?"High":s>=25?"Medium":"Low"}}
+function esc(t){return t.replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
+var last="";
+function show(){var x=$("in").value.trim();if(!x)return;var r=analyse(x),t=T[L],col=r.lv=="High"?"var(--hi)":r.lv=="Medium"?"var(--me)":"var(--lo)";
+ last=t.lv[r.lv]+". "+r.f.join(" ")+(r.lv=="Low"?" "+t.lowN:"");
+ $("out").hidden=false;
+ $("out").innerHTML='<span class="badge '+r.lv+'">'+t.lv[r.lv]+'</span> <b>'+r.s+'/100</b><div class="bar"><i style="width:'+r.s+'%;background:'+col+'"></i></div>'+
+ '<h2>'+t.why+'</h2><ul>'+(r.f.length?r.f.map(function(a){return"<li>"+esc(a)+"</li>"}).join(""):"<li>—</li>")+'</ul>'+
+ (r.lv=="Low"?'<p><b>'+t.lowN+'</b></p>':'')+
+ '<h2>'+t.cant+'</h2><ul><li>'+t.c1+'</li><li>'+t.c2+'</li></ul><button class="s" id="ls">🔊 '+t.listen+'</button>';
+ $("ls").onclick=function(){speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(last);u.lang=L=="hi"?"hi-IN":"en-IN";speechSynthesis.speak(u)}}
+function render(){var t=T[L];document.documentElement.lang=L;$("t").textContent=t.t;$("st").textContent=t.st;$("b1").textContent=t.b1;$("b2").textContent=t.b2;
+ $("h1").textContent=t.h1;$("in").placeholder=t.ph;$("go").textContent=t.go;$("smp").textContent=t.smp;$("priv").textContent=t.priv;
+ $("h2").textContent=t.h2;$("h3").textContent=t.h3;["f1","f2","f3","f4"].forEach(function(k){$(k).placeholder=t[k]});$("gen").textContent=t.gen;$("cp").textContent=t.cp;$("ft").textContent=t.ft;
+ $("lg").textContent=L=="hi"?"English":"हिन्दी";
+ $("steps").innerHTML=t.steps.map(function(s,i){return'<label class="ck"><input type="checkbox"><span>'+(i+1)+'. '+s+'</span></label>'}).join("");
+ $("out").hidden=true;$("cmp").hidden=true}
+$("lg").onclick=function(){L=L=="hi"?"en":"hi";render()};
+$("go").onclick=show;
+$("smp").onclick=function(){$("in").value=L=="hi"?"🔥 VIP ग्रुप जॉइन करें t.me/sureshot_vip — गारंटी 30% महीना रिटर्न! हम SEBI registered हैं। आज ही 5000 UPI 98xxxx@ybl पर भेजें, सीमित सीट। पैसा दोगुना!":"🔥 Join our VIP group t.me/sureshot_vip — guaranteed 30% monthly returns! We are SEBI registered. Send Rs 5000 today to UPI 98xxxx@ybl, limited slots. Double your money!";show()};
+$("b1").onclick=function(){$("p1").hidden=false;$("p2").hidden=true;$("b1").className="";$("b2").className="s"};
+$("b2").onclick=function(){$("p1").hidden=true;$("p2").hidden=false;$("b2").className="";$("b1").className="s"};
+$("gen").onclick=function(){$("cmp").hidden=false;$("cmp").textContent=T[L].draft($("f1").value||"____",$("f2").value||"____",$("f3").value||"____",$("f4").value||"____")};
+$("cp").onclick=function(){try{navigator.clipboard.writeText($("cmp").textContent)}catch(e){}};
+render();
+</script>
+<script>
+Object.assign(T.hi,{b3:"प्रमाण",rct:"असलियत जाँच",rcl:"दावा किया गया रिटर्न, हर महीने:",
+rcf:function(p){var m=Math.pow(1+p/100,12);return "हर महीने "+p+"% का मतलब है 1 साल में ₹10,000 के लगभग ₹"+Math.round(10000*m).toLocaleString("en-IN")+" ("+m.toFixed(1)+" गुना)। कोई भी असली निवेश इसकी गारंटी नहीं दे सकता।"},
+lt:"प्रमाण: इंजन की परीक्षा",ln:"यह टीम का लिखा नमूना सेट है, जिसे असली शिकायती संदेशों से बढ़ाया जाएगा। गलतियाँ जानबूझकर दिखाई गई हैं।",
+pr:"सटीकता",rc2:"पकड़ने की दर",ac:"कुल सही",sc:"ठगी",ge:"असली",fl:"इंजन",
+gt:"भरोसे और नियमों का पालन",gl:["कोई स्टॉक टिप, खरीद/बिक्री संकेत या भाव का अनुमान नहीं","कोई ब्रोकर लिंक, सब्सक्रिप्शन या कमाई का तरीका नहीं","SMS/OTP या निजी वित्तीय रिकॉर्ड नहीं पढ़ता; सब कुछ फ़ोन में ही","नतीजे के साथ कारण और सीमाएँ, सिर्फ़ 'ठगी/सही' का फ़ैसला नहीं"]});
+Object.assign(T.en,{b3:"Evidence",rct:"Reality check",rcl:"Claimed return, per month:",
+rcf:function(p){var m=Math.pow(1+p/100,12);return p+"% every month turns Rs 10,000 into about Rs "+Math.round(10000*m).toLocaleString("en-IN")+" in a year ("+m.toFixed(1)+"x). No genuine investment can guarantee this."},
+lt:"Evidence: testing the engine",ln:"A team-written sample set, to be expanded with real reported messages. Mistakes are shown on purpose.",
+pr:"Precision",rc2:"Recall",ac:"Accuracy",sc:"Scam",ge:"Genuine",fl:"Engine",
+gt:"Trust and guardrails",gl:["No stock tips, buy/sell signals or price predictions","No broker links, subscriptions or monetisation","No SMS/OTP or personal financial records read; all on-device","Reasons and limits shown, never just a scam/safe verdict"]});
+var DS=[
+["Join VIP group t.me/xyz guaranteed 40% monthly returns, limited slots",1],
+["Sure shot tips from operator, double your money in 30 days, send Rs 2000 to UPI 9xx@ybl",1],
+["We are SEBI registered. Install AnyDesk and our expert will trade for you. Assured profit",1],
+["Risk free 100% profit IPO allotment guaranteed, pay processing fee to paytm number",1],
+["VIP ग्रुप जॉइन करें, गारंटी 50% महीना रिटर्न, आज ही जुड़ें",1],
+["पैसा दोगुना करें 15 दिन में, पैसे भेजें UPI पर, सुरेशॉट टिप",1],
+["Insider jackpot stock tip, join telegram vip group today only, 25% weekly return",1],
+["Congratulations! Your account is SEBI approved. Withdrawal needs 20% tax first, transfer to account today",1],
+["Multibagger operator call, assured returns, click bit.ly/abc123 to join before last chance",1],
+["Our AI trading app gives 3% daily returns guaranteed. Download https://sebi-trade-pro.vip and deposit via UPI",1],
+["Last chance! limited seats, join our VIP group, guaranteed profit",1],
+["ऑपरेटर कॉल, जैकपॉट शेयर, गारंटी रिटर्न, टेलीग्राम ग्रुप जॉइन करें",1],
+["Send Rs 10000 to UPI 98xxxx@oksbi and get double returns in a week, risk free",1],
+["Admin here. SEBI registered advisor. 30% per month assured. Hurry, today only",1],
+["Dear customer, update KYC at http://hdfc-kyc-update.top or your account will be blocked",1],
+["Our mentor gives daily stock calls with entry and target. Pay 999 for premium membership",1],
+["Your NSDL CAS statement for September is available. Login to the official portal to view it.",0],
+["Mutual fund SIP of Rs 1000 debited on 5 Oct. Units allotted. Investments are subject to market risk.",0],
+["SEBI has launched an investor awareness campaign. Learn about nomination at sebi.gov.in",0],
+["Reminder: add a nominee to your demat account so your family is protected later.",0],
+["Market risk notice: returns are not guaranteed and past performance does not predict the future.",0],
+["Your OTP for login is 482910. Do not share it with anyone.",0],
+["बैठक का समय बदल गया है, कल शाम 6 बजे मिलते हैं।",0],
+["Dividend of Rs 4 per share has been credited to your bank account linked with your demat.",0],
+["Beware of fake tip groups. SEBI never asks you to send money to personal UPI IDs.",0],
+["Family trip: let us book the tickets today only, the sale ends soon.",0],
+["SIP kya hota hai? It means investing a small fixed amount every month.",0],
+["Your IPO application was submitted. Approve the UPI mandate request in your UPI app.",0],
+["Compounding: Rs 1000 growing at 12% per year roughly doubles in about 6 years.",0],
+["आपके बैंक स्टेटमेंट की PDF तैयार है। पासवर्ड किसी को न बताएँ।",0]];
+function lab(){var t=T[L],tp=0,fn=0,fp=0,tn=0,rows="";
+DS.forEach(function(d){var fl=analyse(d[0]).lv!="Low";if(d[1]&&fl)tp++;else if(d[1])fn++;else if(fl)fp++;else tn++;
+rows+="<tr><td>"+esc(d[0].slice(0,60))+"…</td><td>"+(d[1]?t.sc:t.ge)+"</td><td>"+(fl==!!d[1]?"✅":"❌")+" "+(fl?t.sc:t.ge)+"</td></tr>"});
+var P=tp/(tp+fp||1),Rc=tp/(tp+fn||1),A=(tp+tn)/DS.length;
+return "<h2>"+t.lt+"</h2><p class='note'>"+t.ln+"</p><div class='row'><span class='badge Low'>"+t.pr+" "+Math.round(P*100)+"%</span><span class='badge Low'>"+t.rc2+" "+Math.round(Rc*100)+"%</span><span class='badge Medium'>"+t.ac+" "+Math.round(A*100)+"% ("+DS.length+")</span></div><div style='overflow-x:auto'><table style='width:100%;font-size:13px;border-collapse:collapse'><tr><th align=left>Msg</th><th align=left>Label</th><th align=left>"+t.fl+"</th></tr>"+rows+"</table></div>"}
+function rc(){var p=+$("rs").value;$("rcv").textContent=p+"%";$("ro").textContent=T[L].rcf(p)}
+function tab(n){[1,2,3].forEach(function(i){$("p"+i).hidden=i!=n;$("b"+i).className=i==n?"":"s"})}
+[1,2,3].forEach(function(i){$("b"+i).onclick=function(){tab(i)}});
+$("rs").oninput=rc;$("fs").onclick=function(){document.body.style.fontSize=document.body.style.fontSize?"":"20px"};
+var _r=render;render=function(){_r();var t=T[L];$("b3").textContent=t.b3;$("rct").textContent=t.rct;$("rcl").textContent=t.rcl;rc();$("lab").innerHTML=lab();$("gt").textContent=t.gt;$("gl").innerHTML=t.gl.map(function(g){return"<li>✓ "+g+"</li>"}).join("")};
+render();
+</script>
+</body></html>
