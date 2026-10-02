@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
+<meta name="api-base" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Sangyan Suraksha – Check before you trust</title>
 <style>
@@ -56,7 +57,7 @@ a{color:var(--pr)}[hidden]{display:none!important}
 <script>
 var L="hi",$=function(i){return document.getElementById(i)};
 var T={
-hi:{t:"संज्ञान सुरक्षा",st:"भरोसा करने से पहले जाँचें — और ठगी हो जाए तो क्या करें, जानें।",b1:"संदेश जाँचें",b2:"ठगी के बाद",h1:"WhatsApp/Telegram का संदेश यहाँ चिपकाएँ",ph:"जैसे: 'गारंटी 30% महीना...'",go:"जाँचें",smp:"नमूना संदेश",priv:"आपका संदेश इसी फ़ोन/ब्राउज़र में जाँचा जाता है। कहीं भेजा या सहेजा नहीं जाता।",
+hi:{t:"संज्ञान सुरक्षा",st:"भरोसा करने से पहले जाँचें — और ठगी हो जाए तो क्या करें, जानें।",b1:"संदेश जाँचें",b2:"ठगी के बाद",h1:"WhatsApp/Telegram का संदेश यहाँ चिपकाएँ",ph:"जैसे: 'गारंटी 30% महीना...'",go:"जाँचें",smp:"नमूना संदेश",priv:"आपका संदेश हमारे स्टेटलेस सर्वर पर जाँचा जाता है; कुछ भी सहेजा या लॉग नहीं होता। सर्वर न मिले तो फ़ोन पर ही जाँच होती है।",
 why:"कारण",cant:"जो हम जाँच नहीं सकते",listen:"सुनें",lv:{High:"ज़्यादा जोखिम",Medium:"मध्यम जोखिम",Low:"कोई बड़ा संकेत नहीं मिला"},
 lowN:"इसका मतलब सुरक्षित होना नहीं है। पैसा लगाने से पहले SEBI की वेबसाइट पर पंजीकरण ज़रूर जाँचें।",
 c1:"SEBI पंजीकरण नंबर असली है या नहीं, यह हम यहाँ नहीं जाँच सकते — sebi.gov.in पर 'Intermediaries' में खोजें।",c2:"लिंक का असली मालिक कौन है, यह हम नहीं देख सकते।",
@@ -64,7 +65,7 @@ h2:"अगर पैसा फँस गया है — पहला घंट
 ft:"यह एक शैक्षिक निवेशक-सुरक्षा टूल है। यह कोई निवेश सलाह, टिप या सिफ़ारिश नहीं देता।",
 steps:["और पैसा भेजना तुरंत बंद करें। 'निकासी शुल्क' या 'टैक्स' के नाम पर माँगी गई रकम भी ठगी का हिस्सा है।","सबूत सहेजें: स्क्रीनशॉट, चैट, UPI लेन-देन ID, ग्रुप/प्रोफ़ाइल लिंक। चैट डिलीट न करें।","अपने बैंक/UPI ऐप को तुरंत कॉल करके लेन-देन रोकने/फ़्रीज़ का अनुरोध करें।","राष्ट्रीय साइबर हेल्पलाइन 1930 पर कॉल करें और cybercrime.gov.in पर शिकायत दर्ज करें। जितनी जल्दी, उतना बेहतर।","अगर कोई SEBI-पंजीकृत ब्रोकर/संस्था शामिल है, तो SCORES (scores.sebi.gov.in) पर शिकायत करें।","AnyDesk जैसा ऐप डाला हो तो हटाएँ और बैंक पासवर्ड बदलें।"],
 draft:function(a,b,c,d){return "विषय: ऑनलाइन निवेश धोखाधड़ी की शिकायत\n\nमैं एक पीड़ित निवेशक हूँ। मुझे '"+a+"' के नाम पर निवेश का झाँसा दिया गया।\nतारीख़: "+c+"\nगई रकम: ₹"+b+"\nभुगतान का माध्यम/खाता: "+d+"\n\nमेरे पास स्क्रीनशॉट, चैट और लेन-देन ID के सबूत हैं। कृपया जाँच कर रकम रोकने/वापस दिलाने में सहायता करें।\n\nनाम / मोबाइल: ________"}},
-en:{t:"Sangyan Suraksha",st:"Check before you trust — and know what to do if you've been hit.",b1:"Check a message",b2:"After a scam",h1:"Paste the WhatsApp/Telegram message",ph:"e.g. 'Guaranteed 30% monthly returns...'",go:"Check",smp:"Sample message",priv:"Your message is checked on this device. Nothing is sent or stored.",
+en:{t:"Sangyan Suraksha",st:"Check before you trust — and know what to do if you've been hit.",b1:"Check a message",b2:"After a scam",h1:"Paste the WhatsApp/Telegram message",ph:"e.g. 'Guaranteed 30% monthly returns...'",go:"Check",smp:"Sample message",priv:"Your message is checked by our stateless server (nothing is saved or logged). If the server is unreachable, it is checked on your device.",
 why:"Why",cant:"What we cannot verify",listen:"Listen",lv:{High:"High risk",Medium:"Medium risk",Low:"No strong red flags found"},
 lowN:"This does not mean it is safe. Always verify registration on SEBI's website before putting money in.",
 c1:"We cannot confirm whether a SEBI registration number is genuine here. Search 'Intermediaries' on sebi.gov.in.",c2:"We cannot see who actually owns a link or account.",
@@ -90,7 +91,7 @@ function analyse(x){var s=0,f=[];x=x.replace(/\b(not|no|never)\s+(be\s+)?guarant
  s=Math.min(s,100);return{s:s,f:f,lv:s>=55?"High":s>=25?"Medium":"Low"}}
 function esc(t){return t.replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
 var last="";
-function show(){var x=$("in").value.trim();if(!x)return;var r=analyse(x),t=T[L],col=r.lv=="High"?"var(--hi)":r.lv=="Medium"?"var(--me)":"var(--lo)";
+function show(){var x=$("in").value.trim();if(!x)return;var r=window.__r||analyse(x),t=T[L],col=r.lv=="High"?"var(--hi)":r.lv=="Medium"?"var(--me)":"var(--lo)";
  last=t.lv[r.lv]+". "+r.f.join(" ")+(r.lv=="Low"?" "+t.lowN:"");
  $("out").hidden=false;
  $("out").innerHTML='<span class="badge '+r.lv+'">'+t.lv[r.lv]+'</span> <b>'+r.s+'/100</b><div class="bar"><i style="width:'+r.s+'%;background:'+col+'"></i></div>'+
@@ -118,12 +119,12 @@ Object.assign(T.hi,{b3:"प्रमाण",rct:"असलियत जाँच
 rcf:function(p){var m=Math.pow(1+p/100,12);return "हर महीने "+p+"% का मतलब है 1 साल में ₹10,000 के लगभग ₹"+Math.round(10000*m).toLocaleString("en-IN")+" ("+m.toFixed(1)+" गुना)। कोई भी असली निवेश इसकी गारंटी नहीं दे सकता।"},
 lt:"प्रमाण: इंजन की परीक्षा",ln:"यह टीम का लिखा नमूना सेट है, जिसे असली शिकायती संदेशों से बढ़ाया जाएगा। गलतियाँ जानबूझकर दिखाई गई हैं।",
 pr:"सटीकता",rc2:"पकड़ने की दर",ac:"कुल सही",sc:"ठगी",ge:"असली",fl:"इंजन",
-gt:"भरोसे और नियमों का पालन",gl:["कोई स्टॉक टिप, खरीद/बिक्री संकेत या भाव का अनुमान नहीं","कोई ब्रोकर लिंक, सब्सक्रिप्शन या कमाई का तरीका नहीं","SMS/OTP या निजी वित्तीय रिकॉर्ड नहीं पढ़ता; सब कुछ फ़ोन में ही","नतीजे के साथ कारण और सीमाएँ, सिर्फ़ 'ठगी/सही' का फ़ैसला नहीं"]});
+gt:"भरोसे और नियमों का पालन",gl:["कोई स्टॉक टिप, खरीद/बिक्री संकेत या भाव का अनुमान नहीं","कोई ब्रोकर लिंक, सब्सक्रिप्शन या कमाई का तरीका नहीं","SMS/OTP या निजी रिकॉर्ड नहीं पढ़ता; सर्वर कुछ सहेजता या लॉग नहीं करता","नतीजे के साथ कारण और सीमाएँ, सिर्फ़ 'ठगी/सही' का फ़ैसला नहीं"]});
 Object.assign(T.en,{b3:"Evidence",rct:"Reality check",rcl:"Claimed return, per month:",
 rcf:function(p){var m=Math.pow(1+p/100,12);return p+"% every month turns Rs 10,000 into about Rs "+Math.round(10000*m).toLocaleString("en-IN")+" in a year ("+m.toFixed(1)+"x). No genuine investment can guarantee this."},
 lt:"Evidence: testing the engine",ln:"A team-written sample set, to be expanded with real reported messages. Mistakes are shown on purpose.",
 pr:"Precision",rc2:"Recall",ac:"Accuracy",sc:"Scam",ge:"Genuine",fl:"Engine",
-gt:"Trust and guardrails",gl:["No stock tips, buy/sell signals or price predictions","No broker links, subscriptions or monetisation","No SMS/OTP or personal financial records read; all on-device","Reasons and limits shown, never just a scam/safe verdict"]});
+gt:"Trust and guardrails",gl:["No stock tips, buy/sell signals or price predictions","No broker links, subscriptions or monetisation","No SMS/OTP or personal records read; the server stores and logs nothing","Reasons and limits shown, never just a scam/safe verdict"]});
 var DS=[
 ["Join VIP group t.me/xyz guaranteed 40% monthly returns, limited slots",1],
 ["Sure shot tips from operator, double your money in 30 days, send Rs 2000 to UPI 9xx@ybl",1],
@@ -164,6 +165,11 @@ function rc(){var p=+$("rs").value;$("rcv").textContent=p+"%";$("ro").textConten
 function tab(n){[1,2,3].forEach(function(i){$("p"+i).hidden=i!=n;$("b"+i).className=i==n?"":"s"})}
 [1,2,3].forEach(function(i){$("b"+i).onclick=function(){tab(i)}});
 $("rs").oninput=rc;$("fs").onclick=function(){document.body.style.fontSize=document.body.style.fontSize?"":"20px"};
+var API=((document.querySelector('meta[name=api-base]')||{}).content||"").replace(/\/$/,"");
+function api(x){window.__src="server";var c=new AbortController(),tm=setTimeout(function(){c.abort()},4000);
+return fetch(API+"/api/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:x,lang:L}),signal:c.signal}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){clearTimeout(tm);return j}).catch(function(){window.__src="local";return analyse(x)})}
+var _show=show;show=function(){var x=$("in").value.trim();if(!x)return;api(x).then(function(r){window.__r=r;_show();window.__r=null;$("out").insertAdjacentHTML("beforeend",'<p class="note">'+(window.__src=="server"?(L=="hi"?"सर्वर API से जाँचा गया (कुछ सहेजा नहीं गया)":"Checked by the server API (nothing stored)"):(L=="hi"?"आपके फ़ोन पर जाँचा गया":"Checked on your device"))+'</p>')})};
+$("go").onclick=show;
 var _r=render;render=function(){_r();var t=T[L];$("b3").textContent=t.b3;$("rct").textContent=t.rct;$("rcl").textContent=t.rcl;rc();$("lab").innerHTML=lab();$("gt").textContent=t.gt;$("gl").innerHTML=t.gl.map(function(g){return"<li>✓ "+g+"</li>"}).join("")};
 render();
 </script>

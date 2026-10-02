@@ -1,0 +1,9 @@
+{
+  "name": "sangyan-suraksha",
+  "version": "1.0.0",
+  "description": "Investor-protection tool: check suspicious investment messages and get first-hour scam recovery guidance (SANGYAN Hackathon 2026).",
+  "main": "server.js",
+  "scripts": { "start": "node server.js", "test": "node test.js" },
+  "engines": { "node": ">=18" },
+  "license": "MIT"
+}
